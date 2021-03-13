@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	dice "github.com/PatriciaHudakova/DiceLibrary"
 	"log"
 	"net/http"
-	dice "github.com/PatriciaHudakova/DiceLibrary"
 )
 
 func main() {
