@@ -1,0 +1,12 @@
+version: 2.1 # use 2.1 to make use of orbs and pipelines
+
+orbs:
+  aws-code-deploy: circleci/aws-code-deploy@2.0.0
+
+workflows:
+  deploy_application:
+    jobs:
+      - aws-code-deploy/deploy:
+          application-name: DiceServer
+          deployment-group: DiceServerDeploymentGrp
+          service-role-arn: arn:aws:iam::597111823429:role/CodeDeployServiceRole

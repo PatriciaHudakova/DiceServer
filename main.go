@@ -1,15 +1,26 @@
 package main
 
 import (
-	"fmt"
+	"encoding/json"
 	dice "github.com/PatriciaHudakova/DiceLibrary"
 	"log"
 	"net/http"
 )
 
+type rollingDice struct {
+	Roll int `json:"value"`
+}
+
 func main() {
 	http.HandleFunc("/GET/v1/roll", func(w http.ResponseWriter, r *http.Request) {
-		_, _ = fmt.Fprintf(w, "Your rolled value is: %v", dice.Roll())
+		roll := rollingDice{
+			Roll: dice.Roll(),
+		}
+
+		log.Println("the dice has been rolled")
+		if err := json.NewEncoder(w).Encode(roll); err != nil {
+			log.Printf("unable to marshall json: %s", err)
+		}
 	})
 
 	log.Println("Listening on localhost:8080")
