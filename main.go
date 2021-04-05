@@ -2,9 +2,10 @@ package main
 
 import (
 	"encoding/json"
-	dice "github.com/PatriciaHudakova/DiceLibrary"
 	"log"
 	"net/http"
+
+	dice "github.com/PatriciaHudakova/DiceLibrary"
 )
 
 type rollingDice struct {
@@ -12,7 +13,7 @@ type rollingDice struct {
 }
 
 func main() {
-	http.HandleFunc("/GET/v1/roll", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/v1/roll", func(w http.ResponseWriter, r *http.Request) {
 		roll := rollingDice{
 			Roll: dice.Roll(),
 		}
