@@ -21,11 +21,13 @@ func main() {
 		}
 
 		log.Println("the dice has been rolled")
+
 		if err := json.NewEncoder(w).Encode(roll); err != nil {
 			log.Printf("unable to marshall json: %s", err)
 		}
 	})
 
+    // log messages
 	log.Printf("Listening on localhost %s", getPort())
 
 	log.Fatal(http.ListenAndServe(getPort(), nil))
@@ -36,7 +38,6 @@ func getPort() string {
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
-		fmt.Println("INFO: No PORT env variable detected: defaulting to " + port)
 	}
 	return ":" + port
 }
