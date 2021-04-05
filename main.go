@@ -2,8 +2,10 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	dice "github.com/PatriciaHudakova/DiceLibrary"
 )
@@ -24,7 +26,17 @@ func main() {
 		}
 	})
 
-	log.Println("Listening on localhost:8080")
+	log.Printf("Listening on localhost %s", getPort())
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(getPort(), nil))
+}
+
+// getPort gets the Port from env
+func getPort() string {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+		fmt.Println("INFO: No PORT env variable detected: defaulting to " + port)
+	}
+	return ":" + port
 }
